@@ -1,0 +1,115 @@
+================================================================================
+INTEGRATED FARM MANAGEMENT SYSTEM (PRJ_533) - PROJECT CONTEXT & PROGRESS LOG
+================================================================================
+Repository Name : Rohith0750/Integrated-Farm-Mangement-System
+Local Path      : C:\Users\Rohith S D\OneDrive\Documents\Farm Management
+Document Name   : context.txt
+Last Updated    : 2026-09-23
+
+--------------------------------------------------------------------------------
+1. EXECUTIVE SUMMARY & PROJECT GOAL
+--------------------------------------------------------------------------------
+PRJ_533 is an integrated agricultural resource management and decision-support 
+platform engineered to centralize farm operations, optimize resource utilization 
+(water, fertilizer, equipment, capital), and provide data-driven predictive 
+insights for modern farming.
+
+The platform bridges raw agricultural datasets, open environmental/weather APIs, 
+and machine learning models (crop suitability recommendation, yield forecasting, 
+and leaf disease diagnosis via computer vision) with an intuitive control panel 
+for farmers, farm managers, and agricultural advisors.
+
+--------------------------------------------------------------------------------
+2. LOG OF PAST WORKS COMPLETED
+--------------------------------------------------------------------------------
+
+[COMMITS & MILESTONES HISTORY]
+
+• Commit 4f3ebca (2026-08-10):
+  - Initialized project architecture and created comprehensive README.md (680+ lines).
+  - Defined problem statement, goals, architectural tiers, directory layout, database schema collections, REST API specifications, and ML pipeline design.
+  - Added visual technology stack architecture asset ("Tech Stack image.png").
+
+• Commit 4e5b22e (2026-08-18):
+  - Created CONTRIBUTING.md (330+ lines) defining open-source contribution guidelines.
+  - Established Code of Conduct, developer environment setup instructions (manual & Docker Compose), Conventional Commits standards, branch naming conventions, PR templates, and coding standards across Frontend, Backend, and ML microservices.
+
+• Milestone: Core Frontend Application Build (2026-08-18):
+  - Initialized Vite + React 19 + TypeScript + Tailwind CSS v4 frontend project under `frontend/`.
+  - Built 16 complete page views: Login, Register, Dashboard, Farms, Fields, Crops, Soil, Weather, Inventory, Workers, Finance, Harvest, AI Recommendations, Disease Detection, Alerts, and Reports.
+  - Implemented reusable component library: StatCard, StatusBadge, PageHeader, SearchBar, DecisionSupportCard, MapCard, SoilHealthCard, FormModal, ConfirmDialog, EmptyState, LoadingSkeleton.
+  - Built full service architecture: api.ts (Axios with JWT interceptors), authService, farmService, cropService, soilService, weatherService, inventoryService, financeService, predictionService, recommendationService.
+  - Configured AuthContext, ToastContext, React Router navigation, ProtectedRoute guards, and verified production Vite build (`npm run build` PASS).
+
+• Milestone: Backend API & Database Contract Specification (2026-08-18):
+  - Authored `docs/BACKEND_SPECIFICATION.md` detailing single-file specification for Node/Express REST API endpoints, Mongoose schemas, environment configurations, and FastAPI proxy contracts.
+
+• Milestone: Backend Authentication & Authorization Structure (2026-08-21):
+  - Initialized isolated `backend/` directory with Node.js, Express.js, MongoDB Atlas (Mongoose), JWT, bcryptjs, cookie-parser, cors, and dotenv.
+  - Created Mongoose User model (`src/models/User.js`) with bcrypt password hashing pre-save hook, role-based schema (`Admin`, `Farm Manager`, `Worker`), active flag, and safe object serialization.
+  - Built JWT utility module (`src/utils/jwt.js`) for token signing and verification.
+  - Implemented authentication service (`src/services/authService.js`) and controllers (`src/controllers/authController.js`) for user registration, login, logout, and profile retrieval.
+  - Implemented authentication middleware (`src/middleware/authMiddleware.js`), Role-Based Access Control (`src/middleware/roleMiddleware.js`), and centralized error handling middleware (`src/middleware/errorMiddleware.js`).
+  - Verified backend dependencies (`npm install` PASS) and connected MongoDB Atlas cluster (`ac-zgl8wai-shard-00-01.n7zxp5q.mongodb.net`).
+
+• Milestone: Frontend-Backend Authentication Integration & CORS Resolution (2026-08-21):
+  - Configured `frontend/.env` with `VITE_API_BASE_URL=http://localhost:5000/api`.
+  - Updated CORS allowed origins in `server.js` to dynamically support Vite server ports (`http://localhost:3000`, `http://localhost:5173`).
+  - Updated `frontend/src/services/authService.ts` to call real backend REST endpoints and refactored `AuthContext.tsx` to restore session state on reload.
+
+• Milestone: Google Maps GIS Integration & MongoDB Field Persistence (2026-08-21):
+  - Configured `VITE_GOOGLE_MAPS_API_KEY` in `frontend/.env`.
+  - Installed `@googlemaps/js-api-loader` and `@types/google.maps` in `frontend/`.
+  - Built reusable `GoogleFieldMap.tsx` component featuring Google Places Autocomplete search, interactive draggable markers, reverse geocoding, and custom InfoWindows.
+  - Built backend Mongoose `Field` model (`backend/src/models/Field.js`), `fieldController.js`, and `fieldRoutes.js` mounted at `/api/fields` and `/api/field-sectors`.
+
+• Milestone: End-to-End Resource Modules Implementation (2026-08-25):
+  - Built Mongoose `Crop` model & `/api/crops` endpoints with relational validation (`User` -> `Farm` -> `Field` -> `Crop`).
+  - Built Mongoose `SoilRecord` model & `/api/soil` endpoints with composite soil health score calculator (`soilHealthCalculator.js`).
+  - Built OpenWeatherMap REST client (`weatherService.js`) & deterministic agricultural weather decision engine (`agriculturalWeatherEngine.js`).
+  - Built `Inventory.js`, `Worker.js`, `Income.js`, `Expense.js`, and `Harvest.js` models, controllers, and routes.
+  - Built `predictionController.js` proxying ML inference requests to Python FastAPI microservice on port 8000.
+
+• Milestone: Python FastAPI Machine Learning Microservice Implementation (2026-08-28):
+  - Created `ml-service/` with FastAPI application (`app/main.py`), PyTorch CNN leaf disease model loader (`app/disease_model.py`), and decision engine (`app/predictor.py`).
+  - Served PyTorch deep learning model weights checkpoint (`models/best_tomato_disease_model.pth`).
+  - Verified 100% passing PyTest automated test suite (`7/7` PASS).
+
+--------------------------------------------------------------------------------
+3. CURRENT PROJECT PROGRESS & STATUS
+--------------------------------------------------------------------------------
+Overall Progress Status: ALL PHASES (Frontend App, Backend REST APIs, MongoDB Atlas Database, Google Maps GIS, Live Weather Advisory Engine, and Python FastAPI ML Microservice) ARE 100% COMPLETE AND OPERATIONAL.
+
+Completed Objectives:
+[X] Project Vision & Problem Statement Definition
+[X] Multi-Tier System Architecture Design (React + Express + FastAPI + MongoDB)
+[X] Open-Source Developer Guidelines & Setup Documentation (CONTRIBUTING.md)
+[X] Complete Frontend Application (React 19 + TypeScript + Vite + Tailwind CSS v4 + Recharts + Google Maps)
+    - [X] All 16 Page views created & fully functional
+    - [X] Explainable AI Decision Support Engine components (DecisionSupportCard)
+    - [X] Interactive analytics charts (Recharts) & Geospatial GIS maps (Google Maps)
+    - [X] Full TypeScript interfaces, AuthContext, ToastContext, ProtectedRoute
+    - [X] Verified zero-error production build (`npm run build` PASS)
+[X] Complete Backend REST API & Database Specification (`docs/BACKEND_SPECIFICATION.md`)
+[X] Backend REST API Server Implementation (`backend/`)
+    - [X] 10 Mongoose models (`User`, `Farm`, `Field`, `Crop`, `SoilRecord`, `Inventory`, `Worker`, `Income`, `Expense`, `Harvest`)
+    - [X] 12 Express route modules mounted under `/api/*`
+    - [X] JWT token generation & HTTP-only cookie mechanism with RBAC
+    - [X] Connected live MongoDB Atlas cluster
+[X] OpenWeatherMap & Open-Meteo Weather Advisory Engine (`agriculturalWeatherEngine.js`)
+[X] Python FastAPI Machine Learning Microservice (`ml-service/`)
+    - [X] PyTorch leaf disease computer vision diagnosis model (`best_tomato_disease_model.pth`)
+    - [X] Crop suitability, yield forecasting, and fertilizer deficit prediction engines
+    - [X] Verified 100% passing PyTest test suite
+[X] Full-Stack Documentation & How-to-Run Guides Update Across Repository
+
+--------------------------------------------------------------------------------
+4. KEY REFERENCE DOCUMENTS
+--------------------------------------------------------------------------------
+- README.md: Root system overview, architecture diagrams, and service execution guides
+- frontend/README.md: React 19 client setup, component layout, and page guide
+- backend/README.md: Express REST API documentation, env config, and endpoint specifications
+- ml-service/README.md: FastAPI ML service guide, PyTorch vision details, and Swagger UI docs
+- PROJECT_PROGRESS_AND_EXPLANATION.md: Technical progress log & completed feature matrix
+- BACKEND_INTEGRATION_ROADMAP.md: End-to-end data flow reference map
+================================================================================
